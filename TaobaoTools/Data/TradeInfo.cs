@@ -72,7 +72,8 @@ namespace TaobaoTools.Data
                 mBuyerMessage += buyerMessage;
             }
 
-            mOrders.AddRange(trade.Orders);
+            if (trade.Orders != null)
+                mOrders.AddRange(trade.Orders);
         }
     }
 }
