@@ -55,12 +55,6 @@
     <Compile Include="Data\TradeGroupInfo.cs" />
     <Compile Include="Data\TradeListInfo.cs" />
     <Compile Include="Data\TradeInfo.cs" />
-    <Compile Include="Dialog\AddTradeInfoDlg.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialog\AddTradeInfoDlg.Designer.cs">
-      <DependentUpon>AddTradeInfoDlg.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialog\CoreCenterDlg.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,9 +119,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopClientHelper.cs" />
-    <EmbeddedResource Include="Dialog\AddTradeInfoDlg.resx">
-      <DependentUpon>AddTradeInfoDlg.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialog\CoreCenterDlg.resx">
       <DependentUpon>CoreCenterDlg.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Checkbox.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\STO.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
