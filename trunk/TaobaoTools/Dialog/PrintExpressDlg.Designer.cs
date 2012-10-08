@@ -43,6 +43,7 @@
             this.全部选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.反向选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清除选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelSenderMobile = new System.Windows.Forms.Label();
             this.labelReceiverZip = new System.Windows.Forms.Label();
             this.labelReceiverPhone = new System.Windows.Forms.Label();
             this.labelReceiverAddress = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.labelSenderZip = new System.Windows.Forms.Label();
             this.labelNo = new System.Windows.Forms.Label();
             this.labelSenderAdress = new System.Windows.Forms.Label();
-            this.labelSenderMobile = new System.Windows.Forms.Label();
             this.labelSenderName = new System.Windows.Forms.Label();
             this.labelSenderCity = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
@@ -212,6 +212,16 @@
             this.清除选择ToolStripMenuItem.Text = "清除选择";
             this.清除选择ToolStripMenuItem.Click += new System.EventHandler(this.OnSelectClear);
             // 
+            // labelSenderMobile
+            // 
+            this.labelSenderMobile.BackColor = System.Drawing.Color.Transparent;
+            this.labelSenderMobile.Font = new System.Drawing.Font("宋体", 14F);
+            this.labelSenderMobile.Location = new System.Drawing.Point(137, 206);
+            this.labelSenderMobile.Name = "labelSenderMobile";
+            this.labelSenderMobile.Size = new System.Drawing.Size(122, 34);
+            this.labelSenderMobile.TabIndex = 0;
+            this.labelSenderMobile.Text = "发货人电话";
+            // 
             // labelReceiverZip
             // 
             this.labelReceiverZip.BackColor = System.Drawing.Color.Transparent;
@@ -236,9 +246,9 @@
             // 
             this.labelReceiverAddress.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverAddress.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverAddress.Location = new System.Drawing.Point(412, 123);
+            this.labelReceiverAddress.Location = new System.Drawing.Point(417, 123);
             this.labelReceiverAddress.Name = "labelReceiverAddress";
-            this.labelReceiverAddress.Size = new System.Drawing.Size(330, 88);
+            this.labelReceiverAddress.Size = new System.Drawing.Size(322, 88);
             this.labelReceiverAddress.TabIndex = 1;
             this.labelReceiverAddress.Text = "{收件人地址}";
             // 
@@ -291,16 +301,6 @@
             this.labelSenderAdress.Size = new System.Drawing.Size(252, 38);
             this.labelSenderAdress.TabIndex = 0;
             this.labelSenderAdress.Text = "发货人地址";
-            // 
-            // labelSenderMobile
-            // 
-            this.labelSenderMobile.BackColor = System.Drawing.Color.Transparent;
-            this.labelSenderMobile.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelSenderMobile.Location = new System.Drawing.Point(137, 206);
-            this.labelSenderMobile.Name = "labelSenderMobile";
-            this.labelSenderMobile.Size = new System.Drawing.Size(122, 34);
-            this.labelSenderMobile.TabIndex = 0;
-            this.labelSenderMobile.Text = "发货人电话";
             // 
             // labelSenderName
             // 
