@@ -32,9 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.labelInfo = new System.Windows.Forms.Label();
             this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,10 +67,6 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.listBox1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.webBrowser1);
             this.splitContainer1.Size = new System.Drawing.Size(742, 422);
             this.splitContainer1.SplitterDistance = 247;
             this.splitContainer1.TabIndex = 2;
@@ -86,21 +81,21 @@
             this.listBox1.Size = new System.Drawing.Size(243, 412);
             this.listBox1.TabIndex = 0;
             // 
-            // webBrowser1
+            // labelInfo
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(487, 418);
-            this.webBrowser1.TabIndex = 0;
+            this.labelInfo.AutoSize = true;
+            this.labelInfo.Location = new System.Drawing.Point(83, 9);
+            this.labelInfo.Name = "labelInfo";
+            this.labelInfo.Size = new System.Drawing.Size(29, 12);
+            this.labelInfo.TabIndex = 3;
+            this.labelInfo.Text = "Info";
             // 
             // GraberForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 487);
+            this.Controls.Add(this.labelInfo);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
@@ -110,7 +105,6 @@
             this.Text = "GraberForm";
             this.Load += new System.EventHandler(this.GraberForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -123,6 +117,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Label labelInfo;
     }
 }

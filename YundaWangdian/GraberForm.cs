@@ -23,6 +23,8 @@ namespace YundaWangdian
         const string SearchUrl = "http://www.yundaex.com/www/fuwuwangdian_search.php";
         int[] mParseStages = new int[] { 0, 0 };
         List<SiteData> mCheckSites = new List<SiteData>();
+        int mTotalRequest = 0;
+        int mFinishedRequest = 0;
 
         public GraberForm(CountryData data)
         {
@@ -30,13 +32,75 @@ namespace YundaWangdian
 
             InitializeComponent();
         }
-        
+
+        public string GetUrltoHtml(string Url)
+        {
+            try
+            {
+                System.Net.WebRequest wReq = System.Net.WebRequest.Create(Url);
+                System.Net.WebResponse wResp = wReq.GetResponse();
+                System.IO.Stream respStream = wResp.GetResponseStream();
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(respStream, Encoding.UTF8))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                ShowLogMessage(ex.Message);
+            }
+            return "";
+        }
+
+        void ThreadProc(Object stateInfo)
+        {
+            if (stateInfo is CountryData)
+            {
+                ParseProvinceID(GetUrltoHtml(BaseUrl), stateInfo as CountryData);
+                foreach (ProvinceData provinceData in mCountryData.Provinces)
+                    ProcessThreadWork(provinceData);
+            }
+            else if (stateInfo is ProvinceData)
+            {
+                ProvinceData provinceData = stateInfo as ProvinceData;
+                string Url = ProvinceUrl + provinceData.ID;
+                ParseProvinceIndex(GetUrltoHtml(Url), provinceData);
+            }
+            else if (stateInfo is SubPageRequest)
+            {
+                SubPageRequest request = stateInfo as SubPageRequest;
+                ParseProvinceIndex(GetUrltoHtml(request.url), request.provinceData);
+            }
+            else if (stateInfo is SiteData)
+            {
+                SiteData siteData = stateInfo as SiteData;
+                string Url = SitesUrl + siteData.ID;
+                ParseSiteDetails(GetUrltoHtml(Url), siteData);
+            }
+            mFinishedRequest++;
+        }
+
+        void ProcessThreadWork(object stateInfo)
+        {
+            mTotalRequest++;
+
+            Invoke(new BeginCallBack(UpdateUIQueue), null);
+
+            ThreadPool.QueueUserWorkItem(ThreadProc, stateInfo);
+        }
+
+        delegate void BeginCallBack();
+
+        void UpdateUIQueue()
+        {
+            progressBar1.Maximum = mTotalRequest;
+            progressBar1.Value = mFinishedRequest;
+            labelInfo.Text = string.Format("[{0}/{1}]", mFinishedRequest, mTotalRequest);
+        }
 
         private void GraberForm_Load(object sender, EventArgs e)
         {
-            webBrowser1.Navigated += new WebBrowserNavigatedEventHandler(webBrowser1_Navigated);
-            webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
-            webBrowser1.Url = new Uri(BaseUrl);
+            ProcessThreadWork(mCountryData);
         }
 
         void ShowLogMessage(string msg)
@@ -44,84 +108,9 @@ namespace YundaWangdian
             listBox1.Items.Add(msg);
         }
 
-        void InjectAlertBlocker()
+        void ParseProvinceID(string html, CountryData countryData)
         {
-            HtmlElement head = webBrowser1.Document.GetElementsByTagName("head")[0];
-            HtmlElement scriptEl = webBrowser1.Document.CreateElement("script");
-            IHTMLScriptElement element = (IHTMLScriptElement)scriptEl.DomElement;
-            string alertBlocker = "window.alert = function () { }";
-            element.text = alertBlocker;
-            head.AppendChild(scriptEl);
-        }
-
-        void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
-        {
-            InjectAlertBlocker();
-        }
-
-        void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            if (mParseStages[0] == 0)
-            {
-                ParseProvinceID(webBrowser1.DocumentText);
-
-                mParseStages[0] = 1;
-                mParseStages[1] = 0;
-                progressBar1.Maximum = mCountryData.Provinces.Count;
-                if (mCountryData.Provinces.Count > 0)
-                    webBrowser1.Url = new Uri(ProvinceUrl + mCountryData.Provinces[mParseStages[1]].ID);
-            }
-            else if (mParseStages[0] == 1)
-            {
-                if (ParseProvinceIndex(webBrowser1.DocumentText, mCountryData.Provinces[mParseStages[1]]))
-                {
-                    mParseStages[1]++;
-                    progressBar1.Value = mParseStages[1];
-                    if (mParseStages[1] < mCountryData.Provinces.Count)
-                        webBrowser1.Url = new Uri(ProvinceUrl + mCountryData.Provinces[mParseStages[1]].ID);
-                    else
-                    {
-                        foreach (ProvinceData provinceData in mCountryData.Provinces)
-                        {
-                            foreach (CityData cityData in provinceData.Citys)
-                            {
-                                foreach (SiteData siteData in cityData.Sites)
-                                    mCheckSites.Add(siteData);
-                            }
-                        }
-                        mParseStages[0] = 2;
-                        mParseStages[1] = 0;
-                        progressBar1.Maximum = mCheckSites.Count;
-                        if (mCheckSites.Count > 0)
-                            webBrowser1.Url = new Uri(SitesUrl + mCheckSites[mParseStages[1]].ID);
-                    }
-                }
-            }
-            else if (mParseStages[0] == 2)
-            {
-                try
-                {
-                    ParseSiteDetails(webBrowser1.DocumentText, mCheckSites[mParseStages[1]]);
-                }
-                catch (Exception ex)
-                {
-                    ShowLogMessage(ex.Message);
-                }
-
-                mParseStages[1]++;
-                progressBar1.Value = mParseStages[1];
-                if (mParseStages[1] < mCheckSites.Count)
-                    webBrowser1.Url = new Uri(SitesUrl + mCheckSites[mParseStages[1]].ID);
-                else
-                    mParseStages[0] = 3;
-
-                Thread.Sleep(100);
-            }
-        }
-
-        void ParseProvinceID(string html)
-        {
-            mCountryData.Provinces = new List<ProvinceData>();
+            countryData.Provinces = new List<ProvinceData>();
 
             MatchCollection values = Regex.Matches(html, @"id=\d{3,}\W>[\u4e00-\u9fa5]{2,}<");
             string[] splits = new string[] { "id=", "\">", "<" };
@@ -131,12 +120,10 @@ namespace YundaWangdian
                 if (idValue.Length != 2)
                     continue;
 
-                //ShowLogMessage("ParseProvinceID: " + idValue[0] + "=" + idValue[1]);
-
                 ProvinceData provinceData = new ProvinceData();
                 provinceData.ID = idValue[0];
                 provinceData.Name = idValue[1];
-                mCountryData.Provinces.Add(provinceData);
+                countryData.Provinces.Add(provinceData);
             }
         }
 
@@ -160,6 +147,12 @@ namespace YundaWangdian
         {
             public List<SiteJsonInfo> datas;
             public PagesInfo page;
+        }
+
+        public class SubPageRequest
+        {
+            public string url;
+            public ProvinceData provinceData;
         }
 
         bool ParseProvinceIndex(string html, ProvinceData provinceData)
@@ -195,13 +188,13 @@ namespace YundaWangdian
                     provinceData.Citys.Add(cityData);
                 }
 
-                //ShowLogMessage("ParseSiteJsonInfo: " + siteInfo.bm + "=" + siteInfo.mc);
-
                 SiteData siteData = new SiteData();
                 siteData.Name = siteInfo.mc;
                 siteData.ID = siteInfo.bm;
                 siteData.City = siteInfo.city;
                 cityData.Sites.Add(siteData);
+
+                ProcessThreadWork(siteData);
             }
         
             //http://www.yundaex.com/www/fuwuwangdian_search.php?cmd=search&sheng=086020&city=&keywords=&page=14
@@ -211,7 +204,10 @@ namespace YundaWangdian
             if (currPage * perPageSize < totals)
             {
                 string url = string.Format("{0}?cmd=search&sheng={1}&city=&keywords=&page={2}", SearchUrl, provinceData.ID, currPage + 1);
-                webBrowser1.Url = new Uri(url);
+                SubPageRequest request = new SubPageRequest();
+                request.url = url;
+                request.provinceData = provinceData;
+                ProcessThreadWork(request);
                 return false;
             }
 
@@ -243,7 +239,7 @@ namespace YundaWangdian
             if (start < 0)
                 return false;
 
-            int end = html.IndexOf("}", start);
+            int end = html.IndexOf("}</script>", start);
             if (end < 0)
                 return false;
 
