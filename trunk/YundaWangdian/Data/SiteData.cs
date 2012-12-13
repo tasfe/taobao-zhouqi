@@ -49,5 +49,10 @@ namespace YundaWangdian.Data
 
         [XmlAttribute("fzr")]
         public string fzr { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

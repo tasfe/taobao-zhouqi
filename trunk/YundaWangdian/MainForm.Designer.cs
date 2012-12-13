@@ -41,7 +41,10 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -88,18 +91,19 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(336, 11);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(375, 21);
+            this.textBox1.Size = new System.Drawing.Size(749, 21);
             this.textBox1.TabIndex = 2;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(717, 10);
+            this.button1.Location = new System.Drawing.Point(1091, 10);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "搜索";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.OnSearchClicked);
             // 
             // splitContainer1
             // 
@@ -113,8 +117,12 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.listView1);
-            this.splitContainer1.Size = new System.Drawing.Size(780, 412);
-            this.splitContainer1.SplitterDistance = 343;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.webBrowser1);
+            this.splitContainer1.Size = new System.Drawing.Size(1154, 497);
+            this.splitContainer1.SplitterDistance = 507;
             this.splitContainer1.TabIndex = 4;
             // 
             // listView1
@@ -122,7 +130,8 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader3,
+            this.columnHeader4});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
@@ -130,32 +139,34 @@
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
             this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(339, 408);
+            this.listView1.Size = new System.Drawing.Size(503, 493);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.OnSiteInfoClicked);
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "公司编号";
+            this.columnHeader1.Text = "索引";
+            this.columnHeader1.Width = 40;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "公司名称";
-            this.columnHeader2.Width = 100;
+            this.columnHeader2.Text = "公司编号";
+            this.columnHeader2.Width = 80;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "所在省市";
-            this.columnHeader3.Width = 80;
+            this.columnHeader3.Text = "公司名称";
+            this.columnHeader3.Width = 200;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 453);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 538);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(804, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1178, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -166,11 +177,25 @@
             this.toolStripStatusLabel1.Text = "抓取数据";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.OnParseWebClicked);
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "所在省市";
+            this.columnHeader4.Width = 100;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(639, 493);
+            this.webBrowser1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 475);
+            this.ClientSize = new System.Drawing.Size(1178, 560);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button1);
@@ -183,6 +208,7 @@
             this.Text = "服务网点查询";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -206,6 +232,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
 

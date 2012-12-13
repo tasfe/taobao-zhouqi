@@ -17,6 +17,7 @@ namespace YundaWangdian
     {
         CountryData mCountryData = new CountryData();
         string mDataFile = Application.StartupPath + "\\db.xml";
+        string mTemplateFile = Application.StartupPath + "\\template.html";
 
         public MainForm()
         {
@@ -59,6 +60,10 @@ namespace YundaWangdian
         void FillData()
         {
             comboBox1.Items.Clear();
+
+            if (mCountryData.Provinces == null)
+                return;
+
             foreach (ProvinceData provinceData in mCountryData.Provinces)
                 comboBox1.Items.Add(provinceData.Name);
         }
@@ -86,11 +91,72 @@ namespace YundaWangdian
             CityData cityData = comboBox2.SelectedItem as CityData;
             foreach (SiteData siteData in cityData.Sites)
             {
-                ListViewItem lvItem = new ListViewItem(siteData.ID);
+                ListViewItem lvItem = new ListViewItem((listView1.Items.Count + 1).ToString());
+                lvItem.Tag = siteData;
+
+                lvItem.SubItems.Add(siteData.ID);
                 lvItem.SubItems.Add(siteData.Name);
                 lvItem.SubItems.Add(siteData.City);
                 listView1.Items.Add(lvItem);
             }
+        }
+
+        string BuildHtml(SiteData siteData)
+        {
+            StringBuilder sb = new StringBuilder();
+            StreamReader sr = new StreamReader(mTemplateFile);
+            sb.Append(sr.ReadToEnd());
+            sr.Close();
+
+            sb.Replace("company_bm", siteData.bm);
+            sb.Replace("company_mc", siteData.mc);
+            sb.Replace("company_city", siteData.City);
+            sb.Replace("company_dh", siteData.dh);
+            sb.Replace("company_fzr", siteData.fzr);
+            sb.Replace("company_address", siteData.dz);
+            sb.Replace("company_psfw", siteData.psfw);
+            sb.Replace("company_bpsfw", siteData.bpsfw);
+
+            return sb.ToString();
+        }
+
+        private void OnSiteInfoClicked(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count <= 0)
+                return;
+
+            SiteData siteData = listView1.SelectedItems[0].Tag as SiteData;
+            if (siteData == null)
+                return;
+
+            webBrowser1.DocumentText = BuildHtml(siteData);
+        }
+
+        private void OnSearchClicked(object sender, EventArgs e)
+        {
+            string pattern = textBox1.Text;
+            if (string.IsNullOrEmpty(pattern))
+            {
+                comboBox2_SelectedIndexChanged(null, null);
+                return;
+            }
+
+            List<ListViewItem> filterItem = new List<ListViewItem>();
+            foreach (ListViewItem lvItem in listView1.Items)
+            {
+                SiteData siteData = lvItem.Tag as SiteData;
+                if (siteData == null || siteData.psfw == null || siteData.bpsfw == null)
+                    continue;
+
+                if (siteData.Name.Contains(pattern) || 
+                    siteData.psfw.Contains(pattern) || 
+                    siteData.bpsfw.Contains(pattern))
+                    filterItem.Add(lvItem);
+            }
+
+            listView1.Items.Clear();
+            foreach (ListViewItem lvItem in filterItem)
+                listView1.Items.Add(lvItem);
         }
     }
 }

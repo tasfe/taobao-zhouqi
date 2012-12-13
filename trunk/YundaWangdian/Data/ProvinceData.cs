@@ -15,5 +15,10 @@ namespace YundaWangdian.Data
         public string Name { get; set; }
 
         public List<CityData> Citys { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
