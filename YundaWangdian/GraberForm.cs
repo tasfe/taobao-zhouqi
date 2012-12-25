@@ -25,12 +25,63 @@ namespace YundaWangdian
         List<SiteData> mCheckSites = new List<SiteData>();
         int mTotalRequest = 0;
         int mFinishedRequest = 0;
+        bool mCheckSiteDetail = true;
 
         public GraberForm(CountryData data)
         {
             mCountryData = data;
 
             InitializeComponent();
+        }
+
+        private void GraberForm_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mCheckSiteDetail = true;
+            if (MessageBox.Show("点击确定继续", "确定对全部网点进行数据抓取么？", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                ProcessThreadWork(mCountryData);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string message = "";
+            List<SiteData> siteDatas = new List<SiteData>();
+            foreach (ProvinceData pData in mCountryData.Provinces)
+            {
+                foreach (CityData cData in pData.Citys)
+                {
+                    foreach (SiteData sData in cData.Sites)
+                    {
+                        if (sData.psfw != null && sData.bpsfw != null)
+                            continue;
+
+                        if (siteDatas.Count < 20)
+                            message += sData.Name + "\n";
+                        siteDatas.Add(sData);
+                    }
+                }
+            }
+
+            if (siteDatas.Count == 0)
+            {
+                MessageBox.Show("恭喜，所有的网点信息未发现失败的");
+                return;
+            }
+
+            if (MessageBox.Show(message, string.Format("发现{0}个需要更新的网点，是否立即更新？", siteDatas.Count), MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                mCheckSiteDetail = true;
+                foreach (SiteData sData in siteDatas)
+                    ProcessThreadWork(sData);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            mCheckSiteDetail = false;
         }
 
         public string GetUrltoHtml(string Url)
@@ -77,9 +128,12 @@ namespace YundaWangdian
                 string Url = SitesUrl + siteData.ID;
                 ParseSiteDetails(GetUrltoHtml(Url), siteData);
             }
+
             mFinishedRequest++;
+            Invoke(new BeginCallBack(UpdateUIQueue), null);
         }
 
+        delegate void BeginCallBack();
         void ProcessThreadWork(object stateInfo)
         {
             mTotalRequest++;
@@ -89,8 +143,6 @@ namespace YundaWangdian
             ThreadPool.QueueUserWorkItem(ThreadProc, stateInfo);
         }
 
-        delegate void BeginCallBack();
-
         void UpdateUIQueue()
         {
             progressBar1.Maximum = mTotalRequest;
@@ -98,12 +150,12 @@ namespace YundaWangdian
             labelInfo.Text = string.Format("[{0}/{1}]", mFinishedRequest, mTotalRequest);
         }
 
-        private void GraberForm_Load(object sender, EventArgs e)
-        {
-            ProcessThreadWork(mCountryData);
-        }
-
+        delegate void ShowLogMessageCallBack(string msg);
         void ShowLogMessage(string msg)
+        {
+            Invoke(new ShowLogMessageCallBack(ShowLogMessageThreadSafe), new object[] { msg });
+        }
+        void ShowLogMessageThreadSafe(string msg)
         {
             listBox1.Items.Add(msg);
         }
@@ -194,7 +246,8 @@ namespace YundaWangdian
                 siteData.City = siteInfo.city;
                 cityData.Sites.Add(siteData);
 
-                ProcessThreadWork(siteData);
+                if (mCheckSiteDetail)
+                    ProcessThreadWork(siteData);
             }
         
             //http://www.yundaex.com/www/fuwuwangdian_search.php?cmd=search&sheng=086020&city=&keywords=&page=14

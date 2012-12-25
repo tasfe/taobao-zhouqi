@@ -16,6 +16,12 @@ namespace YundaWangdian.Data
 
         public List<CityData> Citys { get; set; }
 
+        public void Search(List<SiteData> siteDatas, string pattern)
+        {
+            foreach (CityData data in Citys)
+                data.Search(siteDatas, pattern);
+        }
+
         public override string ToString()
         {
             return Name;
