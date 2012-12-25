@@ -64,22 +64,23 @@ namespace YundaWangdian
             if (mCountryData.Provinces == null)
                 return;
 
+            comboBox1.Items.Add("所有");
             foreach (ProvinceData provinceData in mCountryData.Provinces)
-                comboBox1.Items.Add(provinceData.Name);
+                comboBox1.Items.Add(provinceData);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox2.Items.Clear();
-            foreach (ProvinceData provinceData in mCountryData.Provinces)
+            comboBox2.Items.Add("所有");
+            if (comboBox1.SelectedItem is ProvinceData)
             {
-                if (comboBox1.Text == provinceData.Name)
-                {
-                    comboBox2.Tag = provinceData;
-                    foreach (CityData cityData in provinceData.Citys)
-                        comboBox2.Items.Add(cityData);
-                }
+                ProvinceData provinceData = comboBox1.SelectedItem as ProvinceData;
+                comboBox2.Tag = provinceData;
+                foreach (CityData cityData in provinceData.Citys)
+                    comboBox2.Items.Add(cityData);
             }
+            comboBox2.SelectedIndex = 0;
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,8 +89,25 @@ namespace YundaWangdian
             if (comboBox2.SelectedItem == null)
                 return;
 
-            CityData cityData = comboBox2.SelectedItem as CityData;
-            foreach (SiteData siteData in cityData.Sites)
+            if (comboBox2.SelectedItem is CityData)
+            {
+                CityData cityData = comboBox2.SelectedItem as CityData;
+                FillListView(cityData.Sites);
+            }
+            else if (comboBox1.SelectedItem is ProvinceData)
+            {
+                List<SiteData> siteDatas = new List<SiteData>();
+                ProvinceData provinceData = comboBox1.SelectedItem as ProvinceData;
+                foreach (CityData cityData in provinceData.Citys)
+                    siteDatas.AddRange(cityData.Sites);
+                FillListView(siteDatas);
+            }
+        }
+
+        void FillListView(List<SiteData> siteDatas)
+        {
+            listView1.Items.Clear();
+            foreach (SiteData siteData in siteDatas)
             {
                 ListViewItem lvItem = new ListViewItem((listView1.Items.Count + 1).ToString());
                 lvItem.Tag = siteData;
@@ -141,22 +159,15 @@ namespace YundaWangdian
                 return;
             }
 
-            List<ListViewItem> filterItem = new List<ListViewItem>();
-            foreach (ListViewItem lvItem in listView1.Items)
-            {
-                SiteData siteData = lvItem.Tag as SiteData;
-                if (siteData == null || siteData.psfw == null || siteData.bpsfw == null)
-                    continue;
+            List<SiteData> siteDatas = new List<SiteData>();
+            if (comboBox2.SelectedItem is CityData)
+                ((CityData)comboBox2.SelectedItem).Search(siteDatas, pattern);
+            else if (comboBox1.SelectedItem is ProvinceData)
+                ((ProvinceData)comboBox1.SelectedItem).Search(siteDatas, pattern);
+            else
+                mCountryData.Search(siteDatas, pattern);
 
-                if (siteData.Name.Contains(pattern) || 
-                    siteData.psfw.Contains(pattern) || 
-                    siteData.bpsfw.Contains(pattern))
-                    filterItem.Add(lvItem);
-            }
-
-            listView1.Items.Clear();
-            foreach (ListViewItem lvItem in filterItem)
-                listView1.Items.Add(lvItem);
+            FillListView(siteDatas);
         }
     }
 }

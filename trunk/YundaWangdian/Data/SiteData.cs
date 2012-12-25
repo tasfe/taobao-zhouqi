@@ -54,5 +54,13 @@ namespace YundaWangdian.Data
         {
             return Name;
         }
+
+        public void Search(List<SiteData> siteDatas, string pattern)
+        {
+            if (Name.Contains(pattern) ||
+                (!string.IsNullOrEmpty(psfw) && psfw.Contains(pattern)) ||
+                (!string.IsNullOrEmpty(bpsfw) && bpsfw.Contains(pattern)))
+                siteDatas.Add(this);
+        }
     }
 }

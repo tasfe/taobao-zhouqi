@@ -39,10 +39,10 @@
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -51,7 +51,9 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.ItemHeight = 12;
             this.comboBox1.Location = new System.Drawing.Point(47, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 20);
@@ -69,6 +71,7 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(209, 12);
             this.comboBox2.Name = "comboBox2";
@@ -160,6 +163,20 @@
             this.columnHeader3.Text = "公司名称";
             this.columnHeader3.Width = 200;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "所在省市";
+            this.columnHeader4.Width = 100;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(639, 493);
+            this.webBrowser1.TabIndex = 0;
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -176,20 +193,6 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
             this.toolStripStatusLabel1.Text = "抓取数据";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.OnParseWebClicked);
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "所在省市";
-            this.columnHeader4.Width = 100;
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(639, 493);
-            this.webBrowser1.TabIndex = 0;
             // 
             // MainForm
             // 
