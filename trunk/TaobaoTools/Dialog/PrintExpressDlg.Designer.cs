@@ -45,15 +45,15 @@
             this.清除选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelSenderMobile = new System.Windows.Forms.Label();
             this.labelReceiverZip = new System.Windows.Forms.Label();
-            this.labelReceiverPhone = new System.Windows.Forms.Label();
-            this.labelReceiverAddress = new System.Windows.Forms.Label();
-            this.labelReceiverCity = new System.Windows.Forms.Label();
             this.labelReceiverName = new System.Windows.Forms.Label();
+            this.labelReceiverAddress = new System.Windows.Forms.Label();
             this.labelSenderZip = new System.Windows.Forms.Label();
             this.labelNo = new System.Windows.Forms.Label();
             this.labelSenderAdress = new System.Windows.Forms.Label();
             this.labelSenderName = new System.Windows.Forms.Label();
             this.labelSenderCity = new System.Windows.Forms.Label();
+            this.labelReceiverCity = new System.Windows.Forms.Label();
+            this.labelReceiverPhone = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -113,19 +113,19 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.BackgroundImage = global::TaobaoTools.Properties.Resources.STO;
+            this.splitContainer1.Panel2.BackgroundImage = global::TaobaoTools.Properties.Resources.Express;
             this.splitContainer1.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.splitContainer1.Panel2.Controls.Add(this.labelSenderMobile);
             this.splitContainer1.Panel2.Controls.Add(this.labelReceiverZip);
-            this.splitContainer1.Panel2.Controls.Add(this.labelReceiverPhone);
-            this.splitContainer1.Panel2.Controls.Add(this.labelReceiverAddress);
-            this.splitContainer1.Panel2.Controls.Add(this.labelReceiverCity);
             this.splitContainer1.Panel2.Controls.Add(this.labelReceiverName);
+            this.splitContainer1.Panel2.Controls.Add(this.labelReceiverAddress);
             this.splitContainer1.Panel2.Controls.Add(this.labelSenderZip);
             this.splitContainer1.Panel2.Controls.Add(this.labelNo);
             this.splitContainer1.Panel2.Controls.Add(this.labelSenderAdress);
+            this.splitContainer1.Panel2.Controls.Add(this.labelSenderMobile);
             this.splitContainer1.Panel2.Controls.Add(this.labelSenderName);
             this.splitContainer1.Panel2.Controls.Add(this.labelSenderCity);
+            this.splitContainer1.Panel2.Controls.Add(this.labelReceiverPhone);
+            this.splitContainer1.Panel2.Controls.Add(this.labelReceiverCity);
             this.splitContainer1.Size = new System.Drawing.Size(1044, 480);
             this.splitContainer1.SplitterDistance = 180;
             this.splitContainer1.TabIndex = 1;
@@ -226,57 +226,37 @@
             // 
             this.labelReceiverZip.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverZip.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverZip.Location = new System.Drawing.Point(631, 206);
+            this.labelReceiverZip.Location = new System.Drawing.Point(631, 219);
             this.labelReceiverZip.Name = "labelReceiverZip";
             this.labelReceiverZip.Size = new System.Drawing.Size(216, 117);
             this.labelReceiverZip.TabIndex = 1;
             this.labelReceiverZip.Text = "{收件人邮编}";
             // 
-            // labelReceiverPhone
-            // 
-            this.labelReceiverPhone.BackColor = System.Drawing.Color.Transparent;
-            this.labelReceiverPhone.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverPhone.Location = new System.Drawing.Point(464, 206);
-            this.labelReceiverPhone.Name = "labelReceiverPhone";
-            this.labelReceiverPhone.Size = new System.Drawing.Size(220, 114);
-            this.labelReceiverPhone.TabIndex = 1;
-            this.labelReceiverPhone.Text = "{收件人电话}";
-            // 
-            // labelReceiverAddress
-            // 
-            this.labelReceiverAddress.BackColor = System.Drawing.Color.Transparent;
-            this.labelReceiverAddress.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverAddress.Location = new System.Drawing.Point(417, 123);
-            this.labelReceiverAddress.Name = "labelReceiverAddress";
-            this.labelReceiverAddress.Size = new System.Drawing.Size(322, 88);
-            this.labelReceiverAddress.TabIndex = 1;
-            this.labelReceiverAddress.Text = "{收件人地址}";
-            // 
-            // labelReceiverCity
-            // 
-            this.labelReceiverCity.BackColor = System.Drawing.Color.Transparent;
-            this.labelReceiverCity.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold);
-            this.labelReceiverCity.Location = new System.Drawing.Point(631, 89);
-            this.labelReceiverCity.Name = "labelReceiverCity";
-            this.labelReceiverCity.Size = new System.Drawing.Size(137, 114);
-            this.labelReceiverCity.TabIndex = 1;
-            this.labelReceiverCity.Text = "收件人城市";
-            // 
             // labelReceiverName
             // 
             this.labelReceiverName.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverName.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverName.Location = new System.Drawing.Point(453, 94);
+            this.labelReceiverName.Location = new System.Drawing.Point(450, 219);
             this.labelReceiverName.Name = "labelReceiverName";
             this.labelReceiverName.Size = new System.Drawing.Size(188, 117);
             this.labelReceiverName.TabIndex = 1;
             this.labelReceiverName.Text = "{收件人姓名}";
             // 
+            // labelReceiverAddress
+            // 
+            this.labelReceiverAddress.BackColor = System.Drawing.Color.Transparent;
+            this.labelReceiverAddress.Font = new System.Drawing.Font("宋体", 14F);
+            this.labelReceiverAddress.Location = new System.Drawing.Point(412, 140);
+            this.labelReceiverAddress.Name = "labelReceiverAddress";
+            this.labelReceiverAddress.Size = new System.Drawing.Size(322, 88);
+            this.labelReceiverAddress.TabIndex = 1;
+            this.labelReceiverAddress.Text = "{收件人地址}";
+            // 
             // labelSenderZip
             // 
             this.labelSenderZip.BackColor = System.Drawing.Color.Transparent;
             this.labelSenderZip.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelSenderZip.Location = new System.Drawing.Point(293, 206);
+            this.labelSenderZip.Location = new System.Drawing.Point(293, 219);
             this.labelSenderZip.Name = "labelSenderZip";
             this.labelSenderZip.Size = new System.Drawing.Size(122, 34);
             this.labelSenderZip.TabIndex = 0;
@@ -286,9 +266,9 @@
             // 
             this.labelNo.BackColor = System.Drawing.Color.Transparent;
             this.labelNo.Font = new System.Drawing.Font("宋体", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelNo.Location = new System.Drawing.Point(136, 164);
+            this.labelNo.Location = new System.Drawing.Point(137, 115);
             this.labelNo.Name = "labelNo";
-            this.labelNo.Size = new System.Drawing.Size(189, 66);
+            this.labelNo.Size = new System.Drawing.Size(189, 50);
             this.labelNo.TabIndex = 0;
             this.labelNo.Text = "编号";
             // 
@@ -296,11 +276,21 @@
             // 
             this.labelSenderAdress.BackColor = System.Drawing.Color.Transparent;
             this.labelSenderAdress.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelSenderAdress.Location = new System.Drawing.Point(123, 126);
+            this.labelSenderAdress.Location = new System.Drawing.Point(123, 165);
             this.labelSenderAdress.Name = "labelSenderAdress";
             this.labelSenderAdress.Size = new System.Drawing.Size(252, 38);
             this.labelSenderAdress.TabIndex = 0;
             this.labelSenderAdress.Text = "发货人地址";
+            // 
+            // labelSenderMobile
+            // 
+            this.labelSenderMobile.BackColor = System.Drawing.Color.Transparent;
+            this.labelSenderMobile.Font = new System.Drawing.Font("宋体", 14F);
+            this.labelSenderMobile.Location = new System.Drawing.Point(137, 219);
+            this.labelSenderMobile.Name = "labelSenderMobile";
+            this.labelSenderMobile.Size = new System.Drawing.Size(122, 34);
+            this.labelSenderMobile.TabIndex = 0;
+            this.labelSenderMobile.Text = "发货人电话";
             // 
             // labelSenderName
             // 
@@ -321,6 +311,26 @@
             this.labelSenderCity.Size = new System.Drawing.Size(152, 38);
             this.labelSenderCity.TabIndex = 0;
             this.labelSenderCity.Text = "发货人城市";
+            // 
+            // labelReceiverCity
+            // 
+            this.labelReceiverCity.BackColor = System.Drawing.Color.Transparent;
+            this.labelReceiverCity.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold);
+            this.labelReceiverCity.Location = new System.Drawing.Point(446, 89);
+            this.labelReceiverCity.Name = "labelReceiverCity";
+            this.labelReceiverCity.Size = new System.Drawing.Size(401, 114);
+            this.labelReceiverCity.TabIndex = 1;
+            this.labelReceiverCity.Text = "收件人城市";
+            // 
+            // labelReceiverPhone
+            // 
+            this.labelReceiverPhone.BackColor = System.Drawing.Color.Transparent;
+            this.labelReceiverPhone.Font = new System.Drawing.Font("宋体", 14F);
+            this.labelReceiverPhone.Location = new System.Drawing.Point(627, 89);
+            this.labelReceiverPhone.Name = "labelReceiverPhone";
+            this.labelReceiverPhone.Size = new System.Drawing.Size(220, 114);
+            this.labelReceiverPhone.TabIndex = 1;
+            this.labelReceiverPhone.Text = "{收件人电话}";
             // 
             // PrintExpressDlg
             // 
