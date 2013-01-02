@@ -63,6 +63,9 @@ namespace TaobaoTools.Dialog
 
             if (!String.IsNullOrEmpty(trade.ReceiverMobile))
                 labelReceiverPhone.Text = trade.ReceiverMobile + "\n";
+            else
+                labelReceiverPhone.Text = "";
+
             if (!String.IsNullOrEmpty(trade.ReceiverPhone))
                 labelReceiverPhone.Text += trade.ReceiverPhone;
             labelReceiverZip.Text = trade.ReceiverZip;
