@@ -13,6 +13,10 @@ namespace TaobaoTools.Data
         [XmlAttribute("ID")]
         public long ID { get { return mID; } set { mID = value; } }
 
+        float mInternalPrice = 0.0f;
+        [XmlAttribute("InternalPrice"), DefaultValue(0.0f)]
+        public float InternalPrice { get { return mInternalPrice; } set { mInternalPrice = value; } }
+
         string mUserName = "";
         [XmlAttribute("UserName"), DefaultValue("")]
         public String UserName { get { return mUserName; } set { mUserName = value; } }
