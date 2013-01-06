@@ -163,10 +163,10 @@ namespace TaobaoTools
 
         public static List<Trade> GetTradeList()
         {
-            return GetTradeList("WAIT_SELLER_SEND_GOODS", null, null, null);
+            return GetTradeList("WAIT_SELLER_SEND_GOODS", null, null, null, true);
         }
 
-        public static List<Trade> GetTradeList(string status, Nullable<DateTime> begin, Nullable<DateTime> end, String appedFileds)
+        public static List<Trade> GetTradeList(string status, Nullable<DateTime> begin, Nullable<DateTime> end, String appedFileds, bool sellerMemo)
         {
             List<Trade> ret = new List<Trade>();
             try
@@ -192,8 +192,11 @@ namespace TaobaoTools
                     if (response.Trades == null)
                         break;
 
-                    foreach (Trade trade in response.Trades)
-                        GetSellerMemo(client, trade);
+                    if (sellerMemo)
+                    {
+                        foreach (Trade trade in response.Trades)
+                            GetSellerMemo(client, trade);
+                    }
 
                     ret.AddRange(response.Trades);
 

@@ -75,13 +75,13 @@ namespace TaobaoTools.Dialog
         /// <param name="end"></param>
         /// <param name="fullInfo"></param>
         /// <returns></returns>
-        List<Trade> GetRawTradeList(DateTime begin, DateTime end, bool fullInfo)
+        List<Trade> GetRawTradeList(DateTime begin, DateTime end, bool fullInfo, bool sellerMemo)
         {
             List<Trade> searchTrades = null;
             if (fullInfo)
             {
-                searchTrades = TopClientHelper.GetTradeList("WAIT_BUYER_CONFIRM_GOODS", begin, end, "consign_time");
-                searchTrades.AddRange(TopClientHelper.GetTradeList("TRADE_FINISHED", begin, end, "consign_time"));
+                searchTrades = TopClientHelper.GetTradeList("WAIT_BUYER_CONFIRM_GOODS", begin, end, "consign_time", sellerMemo);
+                searchTrades.AddRange(TopClientHelper.GetTradeList("TRADE_FINISHED", begin, end, "consign_time", sellerMemo));
             }
             else
             {
@@ -104,7 +104,7 @@ namespace TaobaoTools.Dialog
             DateTime end = select + new TimeSpan(1, 0, 0, 0);
             DateTime begin = end - new TimeSpan(checkDayNum, 0, 0, 0);
 
-            return GetRawTradeList(begin, end, fullInfo);
+            return GetRawTradeList(begin, end, fullInfo, false);
         }
 
         List<Trade> GetTradeList(List<Trade> searchTrades, DateTime select)
@@ -193,7 +193,7 @@ namespace TaobaoTools.Dialog
             DateTime searchEnd = end;
 
             List<Trade> searchTradeList = new List<Trade>();
-            List<Trade> rawTradeList = GetRawTradeList(searchBegin, searchEnd, true);
+            List<Trade> rawTradeList = GetRawTradeList(searchBegin, searchEnd, true, false);
             foreach (Trade trade in rawTradeList)
             {
                 if (String.IsNullOrEmpty(trade.ConsignTime))

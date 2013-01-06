@@ -19,6 +19,7 @@ namespace TaobaoTools.Data
             {
                 mUserName = itemData.UserName;
                 mItemType = itemData.ItemType;
+                mInternalPrice = itemData.InternalPrice;
             }
         }
 
@@ -33,6 +34,10 @@ namespace TaobaoTools.Data
         string mItemPrice = "";
         [Category("固定属性"), DisplayName("宝贝价格")]
         public string ItemPrice { get { return mItemPrice; } }
+
+        float mInternalPrice = 0.0f;
+        [Category("附加属性"), DisplayName("宝贝进价"), Description("宝贝的进价")]
+        public float InternalPrice { get { return mInternalPrice; } set { mInternalPrice = value; } }
 
         string mUserName = "";
         [Category("附加属性"), DisplayName("宝贝代号"), Description("宝贝的内部名称，如[散鱼]")]

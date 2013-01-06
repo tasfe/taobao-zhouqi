@@ -96,11 +96,13 @@ namespace TaobaoTools.Dialog
             {
                 lvItem.SubItems.Add(itemData.UserName);
                 lvItem.SubItems.Add(itemData.ItemType);
+                lvItem.SubItems.Add(itemData.InternalPrice.ToString());
             }
             else
             {
-                lvItem.SubItems[lvItem.SubItems.Count - 2].Text = itemData.UserName;
-                lvItem.SubItems[lvItem.SubItems.Count - 1].Text = itemData.ItemType;
+                lvItem.SubItems[lvItem.SubItems.Count - 3].Text = itemData.UserName;
+                lvItem.SubItems[lvItem.SubItems.Count - 2].Text = itemData.ItemType;
+                lvItem.SubItems[lvItem.SubItems.Count - 1].Text = itemData.InternalPrice.ToString();
             }
         }
 
@@ -124,6 +126,7 @@ namespace TaobaoTools.Dialog
                     itemData.ID = itemInfo.ItemID;
                     itemData.UserName = itemInfo.UserName;
                     itemData.ItemType = itemInfo.ItemType;
+                    itemData.InternalPrice = itemInfo.InternalPrice;
                     Global.ItemDataContainer.AddOrUpdate(itemData);
 
                     UpdateItemData(lvItem);
