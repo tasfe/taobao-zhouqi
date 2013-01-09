@@ -41,8 +41,8 @@ namespace TaobaoTools.Data
 
             WAIT_BUYER_PAY.FillData(TopClientHelper.GetSimpleTradeList("WAIT_BUYER_PAY", begin, end));
             WAIT_SELLER_SEND_GOODS.FillData(TopClientHelper.GetSimpleTradeList("WAIT_SELLER_SEND_GOODS", begin, end));
-            WAIT_BUYER_CONFIRM_GOODS.FillData(TopClientHelper.GetSimpleTradeList("WAIT_BUYER_CONFIRM_GOODS", begin, end));
-            TRADE_FINISHED.FillData(TopClientHelper.GetSimpleTradeList("TRADE_FINISHED", begin, end));
+            WAIT_BUYER_CONFIRM_GOODS.FillData(TopClientHelper.GetSimpleTradeList("WAIT_BUYER_CONFIRM_GOODS", begin, end, "consign_time"));
+            TRADE_FINISHED.FillData(TopClientHelper.GetSimpleTradeList("TRADE_FINISHED", begin, end, "consign_time"));
 
             AllSucced.Reset();
             AllSucced.Include(WAIT_SELLER_SEND_GOODS);
