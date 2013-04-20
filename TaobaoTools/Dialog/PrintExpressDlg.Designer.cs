@@ -34,26 +34,26 @@
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
             this.全部选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.反向选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清除选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelSenderMobile = new System.Windows.Forms.Label();
             this.labelReceiverZip = new System.Windows.Forms.Label();
             this.labelReceiverName = new System.Windows.Forms.Label();
             this.labelReceiverAddress = new System.Windows.Forms.Label();
             this.labelSenderZip = new System.Windows.Forms.Label();
             this.labelNo = new System.Windows.Forms.Label();
             this.labelSenderAdress = new System.Windows.Forms.Label();
+            this.labelSenderMobile = new System.Windows.Forms.Label();
             this.labelSenderName = new System.Windows.Forms.Label();
             this.labelSenderCity = new System.Windows.Forms.Label();
-            this.labelReceiverCity = new System.Windows.Forms.Label();
             this.labelReceiverPhone = new System.Windows.Forms.Label();
+            this.labelReceiverCity = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -212,23 +212,13 @@
             this.清除选择ToolStripMenuItem.Text = "清除选择";
             this.清除选择ToolStripMenuItem.Click += new System.EventHandler(this.OnSelectClear);
             // 
-            // labelSenderMobile
-            // 
-            this.labelSenderMobile.BackColor = System.Drawing.Color.Transparent;
-            this.labelSenderMobile.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelSenderMobile.Location = new System.Drawing.Point(137, 206);
-            this.labelSenderMobile.Name = "labelSenderMobile";
-            this.labelSenderMobile.Size = new System.Drawing.Size(122, 34);
-            this.labelSenderMobile.TabIndex = 0;
-            this.labelSenderMobile.Text = "发货人电话";
-            // 
             // labelReceiverZip
             // 
             this.labelReceiverZip.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverZip.Font = new System.Drawing.Font("宋体", 14F);
             this.labelReceiverZip.Location = new System.Drawing.Point(631, 219);
             this.labelReceiverZip.Name = "labelReceiverZip";
-            this.labelReceiverZip.Size = new System.Drawing.Size(216, 117);
+            this.labelReceiverZip.Size = new System.Drawing.Size(216, 91);
             this.labelReceiverZip.TabIndex = 1;
             this.labelReceiverZip.Text = "{收件人邮编}";
             // 
@@ -236,9 +226,9 @@
             // 
             this.labelReceiverName.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverName.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverName.Location = new System.Drawing.Point(450, 219);
+            this.labelReceiverName.Location = new System.Drawing.Point(436, 219);
             this.labelReceiverName.Name = "labelReceiverName";
-            this.labelReceiverName.Size = new System.Drawing.Size(188, 117);
+            this.labelReceiverName.Size = new System.Drawing.Size(188, 91);
             this.labelReceiverName.TabIndex = 1;
             this.labelReceiverName.Text = "{收件人姓名}";
             // 
@@ -312,16 +302,6 @@
             this.labelSenderCity.TabIndex = 0;
             this.labelSenderCity.Text = "发货人城市";
             // 
-            // labelReceiverCity
-            // 
-            this.labelReceiverCity.BackColor = System.Drawing.Color.Transparent;
-            this.labelReceiverCity.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold);
-            this.labelReceiverCity.Location = new System.Drawing.Point(446, 89);
-            this.labelReceiverCity.Name = "labelReceiverCity";
-            this.labelReceiverCity.Size = new System.Drawing.Size(401, 114);
-            this.labelReceiverCity.TabIndex = 1;
-            this.labelReceiverCity.Text = "收件人城市";
-            // 
             // labelReceiverPhone
             // 
             this.labelReceiverPhone.BackColor = System.Drawing.Color.Transparent;
@@ -331,6 +311,16 @@
             this.labelReceiverPhone.Size = new System.Drawing.Size(220, 114);
             this.labelReceiverPhone.TabIndex = 1;
             this.labelReceiverPhone.Text = "{收件人电话}";
+            // 
+            // labelReceiverCity
+            // 
+            this.labelReceiverCity.BackColor = System.Drawing.Color.Transparent;
+            this.labelReceiverCity.Font = new System.Drawing.Font("微软雅黑", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelReceiverCity.Location = new System.Drawing.Point(566, 328);
+            this.labelReceiverCity.Name = "labelReceiverCity";
+            this.labelReceiverCity.Size = new System.Drawing.Size(247, 114);
+            this.labelReceiverCity.TabIndex = 1;
+            this.labelReceiverCity.Text = "收件人城市";
             // 
             // PrintExpressDlg
             // 

@@ -17,10 +17,10 @@ namespace YundaWangdian
     public partial class GraberForm : Form
     {
         CountryData mCountryData;
-        const string BaseUrl = "http://www.yundaex.com/www/fuwuwangdian.html";
-        const string ProvinceUrl = "http://www.yundaex.com/www/fuwuwangdian_list.php?id=";
-        const string SitesUrl = "http://www.yundaex.com/www/fuwuwangdian_data.php?id=";
-        const string SearchUrl = "http://www.yundaex.com/www/fuwuwangdian_search.php";
+        const string BaseUrl = "http://www.yundaex.com/fuwuwangdian.html";
+        const string ProvinceUrl = "http://www.yundaex.com/fuwuwangdian_list.php?id=";
+        const string SitesUrl = "http://www.yundaex.com/fuwuwangdian_data.php?id=";
+        const string SearchUrl = "http://www.yundaex.com/fuwuwangdian_search.php";
         int[] mParseStages = new int[] { 0, 0 };
         List<SiteData> mCheckSites = new List<SiteData>();
         int mTotalRequest = 0;
