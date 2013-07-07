@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CB717B61-C1D6-4323-B60A-EEC70C3D936E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -109,6 +109,12 @@
     <Compile Include="Dialog\SettingsDlg.Designer.cs">
       <DependentUpon>SettingsDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\TradeSearchDlg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialog\TradeSearchDlg.Designer.cs">
+      <DependentUpon>TradeSearchDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -145,6 +151,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialog\SettingsDlg.resx">
       <DependentUpon>SettingsDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\TradeSearchDlg.resx">
+      <DependentUpon>TradeSearchDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

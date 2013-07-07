@@ -68,6 +68,36 @@ namespace TaobaoTools
             }
         }
 
+        public static List<Shipping> GetLogisticsOrders(DateTime begin, DateTime end)
+        {
+            List<Shipping> ret = new List<Shipping>();
+            try
+            {
+                for (long page = 1, num = 100; ; page++)
+                {
+                    ITopClient client = Global.DefulatClient();
+                    LogisticsOrdersGetRequest req = new LogisticsOrdersGetRequest();
+                    req.Fields = "tid,out_sid";
+                    req.PageNo = page;
+                    req.PageSize = num;
+                    req.StartCreated = begin;
+                    req.EndCreated = end;
+                    LogisticsOrdersGetResponse response = client.Execute(req, Global.SessionKey);
+                    if (response == null || response.Shippings == null)
+                        break;
+
+                    ret.AddRange(response.Shippings);
+                    if ((long)response.Shippings.Count < num || ret.Count >= response.TotalResults)
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "对不起，LogisticsOrdersGetRequest失败！");
+            }
+            return ret;
+        }
+
         public static List<LogisticsCompany> GetLogisticsCompanies()
         {
             try

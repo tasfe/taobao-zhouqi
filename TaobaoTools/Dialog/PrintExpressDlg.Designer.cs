@@ -53,7 +53,6 @@
             this.labelSenderName = new System.Windows.Forms.Label();
             this.labelSenderCity = new System.Windows.Forms.Label();
             this.labelReceiverPhone = new System.Windows.Forms.Label();
-            this.labelReceiverCity = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -125,7 +124,6 @@
             this.splitContainer1.Panel2.Controls.Add(this.labelSenderName);
             this.splitContainer1.Panel2.Controls.Add(this.labelSenderCity);
             this.splitContainer1.Panel2.Controls.Add(this.labelReceiverPhone);
-            this.splitContainer1.Panel2.Controls.Add(this.labelReceiverCity);
             this.splitContainer1.Size = new System.Drawing.Size(1044, 480);
             this.splitContainer1.SplitterDistance = 180;
             this.splitContainer1.TabIndex = 1;
@@ -312,16 +310,6 @@
             this.labelReceiverPhone.TabIndex = 1;
             this.labelReceiverPhone.Text = "{收件人电话}";
             // 
-            // labelReceiverCity
-            // 
-            this.labelReceiverCity.BackColor = System.Drawing.Color.Transparent;
-            this.labelReceiverCity.Font = new System.Drawing.Font("微软雅黑", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReceiverCity.Location = new System.Drawing.Point(566, 328);
-            this.labelReceiverCity.Name = "labelReceiverCity";
-            this.labelReceiverCity.Size = new System.Drawing.Size(247, 114);
-            this.labelReceiverCity.TabIndex = 1;
-            this.labelReceiverCity.Text = "收件人城市";
-            // 
             // PrintExpressDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -358,7 +346,6 @@
         private System.Windows.Forms.Label labelSenderMobile;
         private System.Windows.Forms.Label labelSenderName;
         private System.Windows.Forms.Label labelSenderCity;
-        private System.Windows.Forms.Label labelReceiverCity;
         private System.Windows.Forms.Label labelReceiverZip;
         private System.Windows.Forms.Label labelReceiverName;
         private System.Windows.Forms.Label labelReceiverAddress;

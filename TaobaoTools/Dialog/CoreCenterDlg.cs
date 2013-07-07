@@ -41,8 +41,7 @@ namespace TaobaoTools.Dialog
 
         private void OnAddTradeClicked(object sender, EventArgs e)
         {
-            //AddTradeInfoDlg dlg = new AddTradeInfoDlg();
-            //dlg.ShowDialog();
+            SwitchControl(new TradeSearchDlg());
         }
     }
 }

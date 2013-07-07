@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +57,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(516, 390);
             this.splitContainer1.SplitterDistance = 64;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button4.Location = new System.Drawing.Point(270, 36);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(83, 23);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "订单查询";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.OnAddTradeClicked);
             // 
             // button3
             // 
@@ -99,17 +110,6 @@
             this.label1.Size = new System.Drawing.Size(161, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "欢迎使用湘山红订单管理软件";
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Location = new System.Drawing.Point(270, 36);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(83, 23);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "添加订单";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.OnAddTradeClicked);
             // 
             // CoreCenterDlg
             // 
