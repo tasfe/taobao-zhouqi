@@ -57,7 +57,7 @@ namespace TaobaoTools.Dialog
                 trade.ReceiverCity,
                 trade.ReceiverDistrict,
                 trade.ReceiverAddress);
-            labelReceiverCity.Text = trade.ReceiverCity;
+            //labelReceiverCity.Text = trade.ReceiverCity;
             labelReceiverName.Text = trade.ReceiverName;
             labelNo.Text = info;
 
