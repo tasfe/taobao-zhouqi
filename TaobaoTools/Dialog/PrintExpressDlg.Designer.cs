@@ -214,9 +214,9 @@
             // 
             this.labelReceiverZip.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverZip.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverZip.Location = new System.Drawing.Point(631, 219);
+            this.labelReceiverZip.Location = new System.Drawing.Point(433, 219);
             this.labelReceiverZip.Name = "labelReceiverZip";
-            this.labelReceiverZip.Size = new System.Drawing.Size(216, 91);
+            this.labelReceiverZip.Size = new System.Drawing.Size(188, 91);
             this.labelReceiverZip.TabIndex = 1;
             this.labelReceiverZip.Text = "{收件人邮编}";
             // 
@@ -224,9 +224,9 @@
             // 
             this.labelReceiverName.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverName.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverName.Location = new System.Drawing.Point(436, 219);
+            this.labelReceiverName.Location = new System.Drawing.Point(433, 89);
             this.labelReceiverName.Name = "labelReceiverName";
-            this.labelReceiverName.Size = new System.Drawing.Size(188, 91);
+            this.labelReceiverName.Size = new System.Drawing.Size(339, 38);
             this.labelReceiverName.TabIndex = 1;
             this.labelReceiverName.Text = "{收件人姓名}";
             // 
@@ -234,9 +234,9 @@
             // 
             this.labelReceiverAddress.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverAddress.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverAddress.Location = new System.Drawing.Point(412, 140);
+            this.labelReceiverAddress.Location = new System.Drawing.Point(412, 127);
             this.labelReceiverAddress.Name = "labelReceiverAddress";
-            this.labelReceiverAddress.Size = new System.Drawing.Size(322, 88);
+            this.labelReceiverAddress.Size = new System.Drawing.Size(334, 92);
             this.labelReceiverAddress.TabIndex = 1;
             this.labelReceiverAddress.Text = "{收件人地址}";
             // 
@@ -304,7 +304,7 @@
             // 
             this.labelReceiverPhone.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverPhone.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverPhone.Location = new System.Drawing.Point(627, 89);
+            this.labelReceiverPhone.Location = new System.Drawing.Point(627, 219);
             this.labelReceiverPhone.Name = "labelReceiverPhone";
             this.labelReceiverPhone.Size = new System.Drawing.Size(220, 114);
             this.labelReceiverPhone.TabIndex = 1;
