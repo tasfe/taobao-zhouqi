@@ -71,6 +71,7 @@ namespace TaobaoTools.Dialog
 
             sb.AppendLine("<table width='550px' align='center' border='1px' bordercolor='#000000' cellspacing='0px' style='border-collapse:collapse'>");
             int orderIndex = 1;
+            int weight = 0;
             foreach (Order order in trade.Orders)
             {
                 if (order.Status == "TRADE_CLOSED_BY_TAOBAO")
@@ -78,6 +79,11 @@ namespace TaobaoTools.Dialog
 
                 ItemData itemData = Global.ItemDataContainer.GetItem(order.NumIid);
                 String orderTitle = itemData != null ? itemData.UserName : order.Title;
+                if (weight >= 0 && itemData != null && itemData.Weight != 0)
+                    weight += (int)(itemData.Weight * order.Num);
+                else
+                    weight = -1;
+
                 if (!String.IsNullOrEmpty(order.SkuPropertiesName))
                 {
                     String key = "买的多，便宜多（请填写*n件的总价）";
@@ -95,6 +101,8 @@ namespace TaobaoTools.Dialog
                 sb.AppendFormat("<tr><td>卖家备注</td><td><strong>{0}</strong></td><td></td><td></td></tr>\n", trade.SellerMemo);
             if (!String.IsNullOrEmpty(trade.BuyerMessage))
                 sb.AppendFormat("<tr><td>买家留言</td><td><strong>{0}</strong></td><td></td><td></td></tr>\n", trade.BuyerMessage);
+            sb.AppendFormat("<tr><td>总净重量</td><td><strong>{0}</strong></td><td></td><td></td></tr>\n", 
+                weight > 0 ? weight + "克" : "请设置宝贝的重量");
             sb.AppendLine("</table>");
         }
 

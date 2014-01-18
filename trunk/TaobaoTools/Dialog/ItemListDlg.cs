@@ -94,15 +94,32 @@ namespace TaobaoTools.Dialog
             ItemData itemData = Global.ItemDataContainer.GetItem(item.NumIid);
             if (lvItem.SubItems.Count < lvItem.ListView.Columns.Count)
             {
+                if (itemData.Weight == 0)
+                {
+                    int idx = itemData.UserName.IndexOfAny("克g".ToCharArray());
+                    if (idx > 0)
+                    {
+                        int begin = idx;
+                        while (begin > 0 && char.IsDigit(itemData.UserName[begin - 1])) begin--;
+                        if (idx > begin)
+                        {
+                            itemData.Weight = int.Parse(itemData.UserName.Substring(begin, idx - begin));
+                            Global.ItemDataContainer.Modified = true;
+                        }
+                    }
+                }
+
                 lvItem.SubItems.Add(itemData.UserName);
                 lvItem.SubItems.Add(itemData.ItemType);
                 lvItem.SubItems.Add(itemData.InternalPrice.ToString());
+                lvItem.SubItems.Add(itemData.Weight.ToString());
             }
             else
             {
-                lvItem.SubItems[lvItem.SubItems.Count - 3].Text = itemData.UserName;
-                lvItem.SubItems[lvItem.SubItems.Count - 2].Text = itemData.ItemType;
-                lvItem.SubItems[lvItem.SubItems.Count - 1].Text = itemData.InternalPrice.ToString();
+                lvItem.SubItems[lvItem.SubItems.Count - 4].Text = itemData.UserName;
+                lvItem.SubItems[lvItem.SubItems.Count - 3].Text = itemData.ItemType;
+                lvItem.SubItems[lvItem.SubItems.Count - 2].Text = itemData.InternalPrice.ToString();
+                lvItem.SubItems[lvItem.SubItems.Count - 1].Text = itemData.Weight.ToString();
             }
         }
 
@@ -127,6 +144,7 @@ namespace TaobaoTools.Dialog
                     itemData.UserName = itemInfo.UserName;
                     itemData.ItemType = itemInfo.ItemType;
                     itemData.InternalPrice = itemInfo.InternalPrice;
+                    itemData.Weight = itemInfo.Weight;
                     Global.ItemDataContainer.AddOrUpdate(itemData);
 
                     UpdateItemData(lvItem);

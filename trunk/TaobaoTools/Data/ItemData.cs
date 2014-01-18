@@ -17,6 +17,9 @@ namespace TaobaoTools.Data
         [XmlAttribute("InternalPrice"), DefaultValue(0.0f)]
         public float InternalPrice { get { return mInternalPrice; } set { mInternalPrice = value; } }
 
+        [XmlAttribute("Weight"), DefaultValue(0.0f)]
+        public int Weight { get; set; }
+
         string mUserName = "";
         [XmlAttribute("UserName"), DefaultValue("")]
         public String UserName { get { return mUserName; } set { mUserName = value; } }
