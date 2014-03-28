@@ -24,6 +24,12 @@ namespace TaobaoTools.Dialog
 
             [DisplayName("运单号码")]
             public string OutSid { get; set; }
+
+            [DisplayName("买家昵称")]
+            public string BuyerNick { get; set; }
+
+            [DisplayName("收获人姓名")]
+            public string ReceiverName { get; set; }
         }
 
         public TradeSearchDlg()
@@ -50,7 +56,9 @@ namespace TaobaoTools.Dialog
                 if (string.IsNullOrEmpty(shipping.OutSid))
                     continue;
 
-                if (shipping.OutSid.Contains(searchData.OutSid))
+                if ((!string.IsNullOrEmpty(searchData.OutSid) && shipping.OutSid.Contains(searchData.OutSid)) ||
+                    (!string.IsNullOrEmpty(searchData.BuyerNick) && shipping.BuyerNick.Contains(searchData.BuyerNick)) ||
+                    (!string.IsNullOrEmpty(searchData.ReceiverName) && shipping.ReceiverName.Contains(searchData.ReceiverName)))
                 {
                     ListViewItem lvItem = listView1.Items.Add(shipping.OutSid);
                     lvItem.SubItems.Add(shipping.Tid.ToString());
