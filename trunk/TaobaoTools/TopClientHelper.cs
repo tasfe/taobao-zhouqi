@@ -77,7 +77,7 @@ namespace TaobaoTools
                 {
                     ITopClient client = Global.DefulatClient();
                     LogisticsOrdersGetRequest req = new LogisticsOrdersGetRequest();
-                    req.Fields = "tid,out_sid";
+                    req.Fields = "tid,out_sid,receiver_name,buyer_nick";
                     req.PageNo = page;
                     req.PageSize = num;
                     req.StartCreated = begin;

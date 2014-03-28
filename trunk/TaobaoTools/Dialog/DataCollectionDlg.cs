@@ -12,6 +12,8 @@ namespace TaobaoTools.Dialog
 {
     public partial class DataCollectionDlg : UserControl
     {
+        public int CountDay { get { return (int)numericUpDown2.Value; } }
+
         public DataCollectionDlg()
         {
             InitializeComponent();
@@ -189,7 +191,7 @@ namespace TaobaoTools.Dialog
         {
             DateTime begin = dateTimePickerBegin.Value.Date;
             DateTime end = dateTimePickerEnd.Value.Date + new TimeSpan(0, 23, 59, 59);
-            DateTime searchBegin = begin - new TimeSpan(5, 0, 0, 0);
+            DateTime searchBegin = begin - new TimeSpan(CountDay, 0, 0, 0);
             DateTime searchEnd = end;
 
             List<Trade> searchTradeList = new List<Trade>();
