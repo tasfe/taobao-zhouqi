@@ -35,8 +35,8 @@ namespace TaobaoTools.Data
         [DisplayName("运单号"), Category("发货信息"), Description("具体一个物流公司的真实运单号码。淘宝官方物流会校验，请谨慎传入!")]
         public string OutSid { get { return mOutSid; } set { mOutSid = value; } }
 
-        string mCompany = "韵达快运";
-        [DisplayName("物流公司"), Category("发货信息"), DefaultValue("韵达快运"), Description("非淘宝官方物流合作公司，填写“其他”"), TypeConverter(typeof(LogisticsCopanyConverter))]
+        string mCompany = "韵达快递";
+        [DisplayName("物流公司"), Category("发货信息"), DefaultValue("韵达快递"), Description("非淘宝官方物流合作公司，填写“其他”"), TypeConverter(typeof(LogisticsCopanyConverter))]
         public string Company { get { return mCompany; } set { mCompany = value; } }
     }
 }
