@@ -214,7 +214,7 @@
             // 
             this.labelReceiverZip.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverZip.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverZip.Location = new System.Drawing.Point(433, 196);
+            this.labelReceiverZip.Location = new System.Drawing.Point(627, 196);
             this.labelReceiverZip.Name = "labelReceiverZip";
             this.labelReceiverZip.Size = new System.Drawing.Size(188, 91);
             this.labelReceiverZip.TabIndex = 1;
@@ -304,7 +304,7 @@
             // 
             this.labelReceiverPhone.BackColor = System.Drawing.Color.Transparent;
             this.labelReceiverPhone.Font = new System.Drawing.Font("宋体", 14F);
-            this.labelReceiverPhone.Location = new System.Drawing.Point(627, 196);
+            this.labelReceiverPhone.Location = new System.Drawing.Point(433, 196);
             this.labelReceiverPhone.Name = "labelReceiverPhone";
             this.labelReceiverPhone.Size = new System.Drawing.Size(220, 114);
             this.labelReceiverPhone.TabIndex = 1;
