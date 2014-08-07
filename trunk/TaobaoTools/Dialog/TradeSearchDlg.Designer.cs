@@ -38,6 +38,8 @@
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -125,7 +127,9 @@
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
@@ -159,6 +163,14 @@
             this.tabPage2.Text = "收件人";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "退款金额";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "订单状态";
+            // 
             // TradeSearchDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -189,5 +201,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

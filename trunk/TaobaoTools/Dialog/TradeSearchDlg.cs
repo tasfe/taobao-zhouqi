@@ -30,7 +30,22 @@ namespace TaobaoTools.Dialog
 
             [DisplayName("收获人姓名")]
             public string ReceiverName { get; set; }
+
+            [DisplayName("查询退货"), DefaultValue(false)]
+            public bool SearchRefund { get; set; }
         }
+
+        Dictionary<string, string> StatusNameMap = new Dictionary<string, string>()
+        {
+            { "TRADE_NO_CREATE_PAY", "没有创建支付宝交易" },
+            { "WAIT_BUYER_PAY", "等待买家付款" },
+            { "WAIT_SELLER_SEND_GOODS", "等待卖家发货,即:买家已付款" },
+            { "WAIT_BUYER_CONFIRM_GOODS", "等待买家确认收货,即:卖家已发货" },
+            { "TRADE_BUYER_SIGNED", "买家已签收,货到付款专用" },
+            { "TRADE_FINISHED", "交易成功" },
+            { "TRADE_CLOSED", "交易关闭" },
+            { "TRADE_CLOSED_BY_TAOBAO", "付款以前，卖家或买家主动关闭交易" }
+        };
 
         public TradeSearchDlg()
         {
@@ -46,28 +61,52 @@ namespace TaobaoTools.Dialog
         {
             listView1.Items.Clear();
             SearchData searchData = propertyGrid1.SelectedObject as SearchData;
-            List<Shipping> shippings = TopClientHelper.GetLogisticsOrders(searchData.Begin, searchData.End);
-            if (shippings == null)
-                return;
 
-            int founded = 0;
-            foreach (Shipping shipping in shippings)
+            if (searchData.SearchRefund)
             {
-                if (string.IsNullOrEmpty(shipping.OutSid))
-                    continue;
-
-                if ((!string.IsNullOrEmpty(searchData.OutSid) && shipping.OutSid.Contains(searchData.OutSid)) ||
-                    (!string.IsNullOrEmpty(searchData.BuyerNick) && shipping.BuyerNick.Contains(searchData.BuyerNick)) ||
-                    (!string.IsNullOrEmpty(searchData.ReceiverName) && shipping.ReceiverName.Contains(searchData.ReceiverName)))
+                var refunds = TopClientHelper.GetRefund(searchData.Begin, searchData.End);
+                foreach (var refund in refunds)
                 {
-                    ListViewItem lvItem = listView1.Items.Add(shipping.OutSid);
-                    lvItem.SubItems.Add(shipping.Tid.ToString());
-                    founded++;
+                    if (refund.Status == "CLOSED")
+                        continue;
+
+                    var trade = TopClientHelper.GetTradeInfo(refund.Tid, "status");
+                    var status = "超时";
+                    if (trade != null)
+                        StatusNameMap.TryGetValue(trade.Status, out status);
+
+                    var lvItem = listView1.Items.Add(refund.Created);
+                    lvItem.SubItems.Add(refund.BuyerNick.ToString());
+                    lvItem.SubItems.Add(refund.RefundFee);
+                    lvItem.SubItems.Add(status);
+                    lvItem.Tag = refund.Tid;
                 }
             }
+            else
+            {
+                var shippings = TopClientHelper.GetLogisticsOrders(searchData.Begin, searchData.End);
+                if (shippings == null)
+                    return;
 
-            string text = string.Format("搜索了【{0}】条物流信息，找到了对应的【{1}】条！", shippings.Count, founded);
-            MessageBox.Show(text);
+                int founded = 0;
+                foreach (Shipping shipping in shippings)
+                {
+                    if (string.IsNullOrEmpty(shipping.OutSid))
+                        continue;
+
+                    if ((!string.IsNullOrEmpty(searchData.OutSid) && shipping.OutSid.Contains(searchData.OutSid)) ||
+                        (!string.IsNullOrEmpty(searchData.BuyerNick) && shipping.BuyerNick.Contains(searchData.BuyerNick)) ||
+                        (!string.IsNullOrEmpty(searchData.ReceiverName) && shipping.ReceiverName.Contains(searchData.ReceiverName)))
+                    {
+                        var lvItem = listView1.Items.Add(shipping.OutSid);
+                        lvItem.SubItems.Add(shipping.Tid.ToString());
+                        lvItem.Tag = shipping.Tid;
+                        founded++;
+                    }
+                }
+                string text = string.Format("搜索了【{0}】条物流信息，找到了对应的【{1}】条！", shippings.Count, founded);
+                MessageBox.Show(text);
+            }
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -75,7 +114,7 @@ namespace TaobaoTools.Dialog
             if (listView1.SelectedItems.Count == 0)
                 return;
 
-            long tid = long.Parse(listView1.SelectedItems[0].SubItems[1].Text);
+            long tid = (long)listView1.SelectedItems[0].Tag;
             Process.Start(
                 String.Format("http://trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId={0}", tid));
         }

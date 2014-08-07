@@ -68,6 +68,43 @@ namespace TaobaoTools
             }
         }
 
+        public static Trade GetTradeInfo(long tid, string fields)
+        {
+            var req = new TradeGetRequest();
+            req.Fields = fields;
+            req.Tid = tid;
+            var response = Global.DefulatClient().Execute(req, Global.SessionKey);
+            return response.Trade;
+        }
+
+        public static List<Refund> GetRefund(DateTime begin, DateTime end)
+        {
+            var ret = new List<Refund>();
+            try
+            {
+                for (long page = 1, num = 100; ; page++)
+                {
+                    ITopClient client = Global.DefulatClient();
+                    var request = new RefundsReceiveGetRequest();
+                    request.Fields = "tid,buyer_nick,status,created,refund_fee,order_status";
+                    request.PageNo = page;
+                    request.PageSize = num;
+                    request.StartModified = begin;
+                    request.EndModified = end;
+                    var response = client.Execute(request, Global.SessionKey);
+                    ret.AddRange(response.Refunds);
+
+                    if ((long)response.Refunds.Count < num || ret.Count >= response.TotalResults)
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "对不起，RefundsReceiveGetRequest失败！");
+            }
+            return ret;
+        }
+
         public static List<Shipping> GetLogisticsOrders(DateTime begin, DateTime end)
         {
             List<Shipping> ret = new List<Shipping>();
@@ -209,7 +246,7 @@ namespace TaobaoTools
                     req.Fields += ",buyer_nick";
                     req.Fields += ",receiver_name,receiver_mobile,receiver_phone,receiver_state,receiver_city,receiver_district,receiver_address,receiver_zip";
                     req.Fields += ",seller_memo,seller_flag";
-                    req.Fields += ",orders.title,orders.num,orders.num_iid,orders.status,orders.sku_properties_name";
+                    req.Fields += ",orders.title,orders.num,orders.num_iid,orders.refund_id,orders.refund_status,orders.status,orders.sku_properties_name";
                     if (!string.IsNullOrEmpty(appedFileds))
                         req.Fields += "," + appedFileds;
                     req.Status = status;
@@ -247,18 +284,14 @@ namespace TaobaoTools
             if (!String.IsNullOrEmpty(trade.SellerMemo))
                 return;
 
-            TradeGetRequest req = new TradeGetRequest();
-            req.Fields = "buyer_message,seller_memo";
-            req.Tid = trade.Tid;
-
-            TradeGetResponse response = client.Execute(req, Global.SessionKey);
-            if (response.Trade != null)
+            var tradeInfo = GetTradeInfo(trade.Tid, "buyer_message,seller_memo");
+            if (tradeInfo != null)
             {
-                if (!String.IsNullOrEmpty(response.Trade.BuyerMessage))
-                    trade.BuyerMessage = response.Trade.BuyerMessage;
+                if (!String.IsNullOrEmpty(tradeInfo.BuyerMessage))
+                    trade.BuyerMessage = tradeInfo.BuyerMessage;
 
-                if (!String.IsNullOrEmpty(response.Trade.SellerMemo))
-                    trade.SellerMemo = response.Trade.SellerMemo;
+                if (!String.IsNullOrEmpty(tradeInfo.SellerMemo))
+                    trade.SellerMemo = tradeInfo.SellerMemo;
             }
         }
 
